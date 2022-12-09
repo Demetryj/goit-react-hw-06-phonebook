@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { nanoid } from 'nanoid';
 
-import { Forma } from '../components/Forma/Forma';
-import { ListContacts } from '../components/ListContacts/ListContacts';
-import { Filter } from '../components/Filter/Filter';
+import { Forma } from 'components/Forma/Forma';
+import { ListContacts } from 'components/ListContacts/ListContacts';
+import { Filter } from 'components/Filter/Filter';
 import { Box } from './Box';
 import { Title, TitleContacts } from './Titles/TitlesStyled';
 
@@ -15,7 +15,7 @@ export const App = () => {
   });
   const [filter, setFilter] = useState('');
 
-  let isFirstRender = useRef(true);
+  const isFirstRender = useRef(true);
 
   useEffect(() => {
     if (isFirstRender.current) {
