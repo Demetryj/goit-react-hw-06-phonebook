@@ -1,14 +1,5 @@
 import styled from 'styled-components';
 
-export const ElementList = styled.li`
-  display: flex;
-  align-items: center;
-
-  &:not(:last-child) {
-    margin-bottom: ${props => props.theme.space[3]}px;
-  }
-`;
-
 export const Circle = styled.span`
   margin-right: ${props => props.theme.space[3]}px;
 
