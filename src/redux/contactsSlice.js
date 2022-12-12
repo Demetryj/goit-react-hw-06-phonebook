@@ -5,7 +5,7 @@ import storage from 'redux-persist/lib/storage'; // defaults to localStorage for
 export const contactSlice = createSlice({
   name: 'contacts',
   initialState: {
-    initialContacts: [{ id: '1', name: 'qwe', number: '256352456' }],
+    initialContacts: [],
   },
   /* при використанні бібліотеки "redux-persist" при записі у Local Storage - записується об'єкт, тому
   потрібно в початковий стан записувати не просто масив, а об'єкт із властивістю,
