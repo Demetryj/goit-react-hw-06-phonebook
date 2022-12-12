@@ -1,11 +1,17 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
-
+import { useSelector, useDispatch } from 'react-redux';
+import { nanoid } from '@reduxjs/toolkit';
+import toast, { Toaster } from 'react-hot-toast';
+import { getContacts } from 'redux/selectors';
+import { addContacts } from 'redux/contactsSlice';
 import { Form, Label, Input, Button } from './FormaStyled';
 
-export const Forma = ({ onSubmit, contacts }) => {
+export const Forma = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+
+  const contacts = useSelector(getContacts);
+  const dispatch = useDispatch();
 
   const handleChangeInput = event => {
     const { name, value } = event.target;
@@ -24,13 +30,15 @@ export const Forma = ({ onSubmit, contacts }) => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    onSubmit({ name, number });
 
-    if (contacts.some(contact => contact.name === name)) {
+    const searchedContact = contacts.find(contact => contact.name === name);
+
+    if (searchedContact) {
+      toast.error(`${searchedContact.name} is already in contacts`);
       return;
-      /* Перевірка при сабміті: якщо таке ім'я контакта вже є, то не
-        очищувати форму після алерта. */
     }
+
+    dispatch(addContacts({ id: nanoid(), name, number }));
 
     setName('');
     setNumber('');
@@ -69,11 +77,7 @@ export const Forma = ({ onSubmit, contacts }) => {
       </Label>
 
       <Button type="submit">Add contact</Button>
+      <Toaster />
     </Form>
   );
-};
-
-Forma.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-  contacts: PropTypes.array.isRequired,
 };
