@@ -1,17 +1,25 @@
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import { ElementList, Text, Button, Circle } from './ElementListContactsStyled';
+import { deleteContacts } from 'redux/contactsSlice';
+import { Text, Button, Circle } from './ElementListContactsStyled';
 
-export const ElementListContacts = ({ id, name, number, onClickDelete }) => {
+export const ElementListContacts = ({ id, name, number }) => {
+  const dispatch = useDispatch();
+
+  const handleDelete = () => {
+    dispatch(deleteContacts({ id: id }));
+  };
+
   return (
-    <ElementList>
+    <>
       <Circle></Circle>
       <Text>
         {name}: {number}
       </Text>
-      <Button type="button" onClick={() => onClickDelete(id)}>
+      <Button type="button" onClick={handleDelete}>
         Delete
       </Button>
-    </ElementList>
+    </>
   );
 };
 
@@ -19,5 +27,4 @@ ElementListContacts.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   number: PropTypes.string.isRequired,
-  onClickDelete: PropTypes.func.isRequired,
 };
