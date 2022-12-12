@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getContacts, getFilterValue } from 'redux/selectors';
-import { ElementListContacts } from '../ElementListContacts/ElementListContacts';
+import { ElementListContacts } from 'components/ElementListContacts';
 import { List, ElementList } from './ListContactsStyled';
 
 export const ListContacts = () => {
